@@ -15,7 +15,7 @@ Before working with this project, complete the following steps:
 -   Clone this repo:
 
 ```bash
-git clone https://github.com/EugeneHadion/playwright_ui.git
+git clone https://github.com/EugeneHadion/playwright-ui.git
 ```
 
 -   Install dependencies:
@@ -58,7 +58,7 @@ npm run report:html:show
 
 ### CI
 
-When running the `playwright.yml` workflow, the HTML report is deployed to the `reports` branch. The GitHub Pages feature is enabled in this branch, and you can view the deployed report by following this [link](https://eugenehadion.github.io/playwright_ui/).
+When running the `playwright.yml` workflow, the HTML report is deployed to the `reports` branch. The GitHub Pages feature is enabled in this branch, and you can view the deployed report by following this [link](https://eugenehadion.github.io/playwright-ui/).
 
 ## GitHub Actions
 
