@@ -5,3 +5,4 @@ node_modules/
 reports/
 .prettierrc
 .env
+test.ts

@@ -2,17 +2,16 @@ import { expect, test } from "../fixtures/fixtures";
 import { generateRandomNumber, generateRandomString } from "../helper/random_generator.helper";
 
 test.describe("Complete Flow for Purchasing", () => {
-    test("Complete Flow for Purchasing", { tag: "@004" }, async ({ loginPage, inventoryPage, cartPage, checkoutStepOnePage, checkoutStepTwoPage, checkoutCompletePage }) => {
+    test("Complete Flow for Purchasing", { tag: "@004" }, async ({ loginAs, loginPage, inventoryPage, cartPage, checkoutStepOnePage, checkoutStepTwoPage, checkoutCompletePage }) => {
         await test.step("Successful Login with Valid Credentials", async () => {
-            await loginPage.open();
-            await loginPage.login({ username: process.env.LOGIN_STANDART_USER, password: process.env.LOGIN_PASSWORD });
+            await loginAs('validUser');
             await expect(inventoryPage.extendSidebarMenuBtn).toBeVisible();
             await expect(inventoryPage.page).toHaveURL(inventoryPage.endpoint);
         });
 
         await test.step("Add item to the card", async () => {
-            await inventoryPage.addToCardBtn.nth(0).click();
-            await expect(inventoryPage.shoppingCardBadge).toBeVisible();
+            await inventoryPage.addToCartBtn.nth(0).click();
+            await expect(inventoryPage.shoppingCartBadge).toBeVisible();
         });
 
         await test.step("Open cart page", async () => {
