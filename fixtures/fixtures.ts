@@ -26,9 +26,7 @@ export const test = base.extend<{
             };
             await use(loginAs);
         },
-    inventoryPage: async ({ page }, use) => {
-        await use(new InventoryPage(page));
-    },
+  
     cartPage: async ({ page }, use) => {
         await use(new CartPage(page));
     },
