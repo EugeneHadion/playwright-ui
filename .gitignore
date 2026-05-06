@@ -3,6 +3,13 @@
 node_modules/
 /test-results/
 reports/
-.prettierrc
+playwright-report/
 .env
 test.ts
+
+# IDE
+.idea/
+.DS_Store
+
+# Logs
+*.log

@@ -27,7 +27,7 @@ npm i
 -   Install playwright browsers:
 
 ```bash
-npm playwright install
+npx playwright install
 ```
 
 ## Steps to run

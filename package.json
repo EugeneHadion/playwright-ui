@@ -1,24 +1,28 @@
 {
-  "name": "softonix",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "tests": "playwright test -c configs/playwright.config.ts",
-    "tests:headed": "playwright test -c configs/playwright.config.ts --headed",
-    "report:html:show": "playwright show-report reports/html"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@playwright/test": "^1.51.1",
-    "@types/node": "^22.14.1",
-    "tsconfig-paths": "^4.2.0"
-  },
-  "dependencies": {
-    "dotenv": "^16.5.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
-  }
+    "name": "playwright-ui",
+    "version": "1.0.0",
+    "description": "Playwright UI tests for saucedemo",
+    "scripts": {
+        "tests": "playwright test -c configs/playwright.config.ts",
+        "tests:headed": "playwright test -c configs/playwright.config.ts --headed",
+        "tests:ui": "playwright test -c configs/playwright.config.ts --ui",
+        "tests:debug": "playwright test -c configs/playwright.config.ts --debug",
+        "tests:chromium": "playwright test -c configs/playwright.config.ts --project=chromium",
+        "tests:firefox": "playwright test -c configs/playwright.config.ts --project=firefox",
+        "tests:webkit": "playwright test -c configs/playwright.config.ts --project=webkit",
+        "report:html:show": "playwright show-report reports/html",
+        "format": "prettier --write ."
+    },
+    "license": "ISC",
+    "devDependencies": {
+        "@playwright/test": "^1.51.1",
+        "@types/node": "^22.14.1",
+        "prettier": "^3.3.3",
+        "ts-node": "^10.9.2",
+        "tsconfig-paths": "^4.2.0",
+        "typescript": "^5.8.3"
+    },
+    "dependencies": {
+        "dotenv": "^16.5.0"
+    }
 }

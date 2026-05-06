@@ -1,3 +1,3 @@
-async function globalTeardown() {}
+async function globalSetup() {}
 
-export default globalTeardown;
+export default globalSetup;

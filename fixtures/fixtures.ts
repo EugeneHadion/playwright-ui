@@ -6,42 +6,54 @@ import CartPage from "../pages/cart.page";
 import CheckoutStepOnePage from "../pages/checkout_step_one.page";
 import CheckoutStepTwoPage from "../pages/checkout_step_two.page";
 import CheckoutCompletePage from "../pages/checkout_complete.page";
-import { UserRole, USERS } from "test-data/users";
+import { Credentials, UserRole, USERS } from "../test-data/users";
 
-export const test = base.extend<{
+type Fixtures = {
     loginPage: LoginPage;
     loginAs: (role: UserRole) => Promise<void>;
+    attemptLogin: (role: UserRole) => Promise<void>;
+    loggedInAs: (username: string) => Promise<void>;
     inventoryPage: InventoryPage;
     cartPage: CartPage;
     checkoutStepOnePage: CheckoutStepOnePage;
     checkoutStepTwoPage: CheckoutStepTwoPage;
     checkoutCompletePage: CheckoutCompletePage;
-}>({
-    loginPage: async ({ page }, use) => {
-        await use(new LoginPage(page));
+};
+
+export const test = base.extend<Fixtures>({
+    loginPage:           async ({ page }, use) => use(new LoginPage(page)),
+    inventoryPage:       async ({ page }, use) => use(new InventoryPage(page)),
+    cartPage:            async ({ page }, use) => use(new CartPage(page)),
+    checkoutStepOnePage: async ({ page }, use) => use(new CheckoutStepOnePage(page)),
+    checkoutStepTwoPage: async ({ page }, use) => use(new CheckoutStepTwoPage(page)),
+    checkoutCompletePage: async ({ page }, use) => use(new CheckoutCompletePage(page)),
+
+    loginAs: async ({ loginPage, inventoryPage }, use) => {
+        await use(async (role: UserRole) => {
+            await loginPage.login(USERS[role]);
+            await inventoryPage.expectOpened();
+        });
     },
-    loginAs: async ({ loginPage }, use) => {
-            const loginAs = async (role: UserRole) => {
-                await loginPage.login(USERS[role]);
-            };
-            await use(loginAs);
-        },
-    inventoryPage: async ({ page }, use) => {
-        await use(new InventoryPage(page));
+
+    attemptLogin: async ({ loginPage }, use) => {
+        await use(async (role: UserRole) => {
+            await loginPage.login(USERS[role]);
+        });
     },
-    cartPage: async ({ page }, use) => {
-        await use(new CartPage(page));
+
+    loggedInAs: async ({ context }, use) => {
+        await use(async (username: string) => {
+            await context.addCookies([
+                {
+                    name: "session-username",
+                    value: username,
+                    domain: "www.saucedemo.com",
+                    path: "/",
+                    sameSite: "Lax",
+                },
+            ]);
+        });
     },
-    checkoutStepOnePage: async ({ page }, use) => {
-        await use(new CheckoutStepOnePage(page));
-    },
-    checkoutStepTwoPage: async ({ page }, use) => {
-        await use(new CheckoutStepTwoPage(page));
-    },
-    checkoutCompletePage: async ({ page }, use) => {
-        await use(new CheckoutCompletePage(page));
-    },
-    
 });
 
-export { expect, type Page, type Download, type Locator, type TestInfo } from "@playwright/test";
+export { expect, type Page, type Locator, type TestInfo } from "@playwright/test";

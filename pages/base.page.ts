@@ -1,30 +1,9 @@
-// import { Page } from "../fixtures/fixtures";
-
-// export default class BasePage {
-//     public page: Page;
-//     public endpoint = "";
-
-//     constructor(page: Page) {
-//         this.usePage = page;
-//     }
-
-//     set usePage(page: Page) {
-//         this.page = page;
-//     }
-
-//     /**
-//      * Open page
-//      * @param path - page endpoint
-//      */
-//     async open(path = ""): Promise<void> {
-//         await this.page.goto("/" + path);
-//     }
-// }
+import { expect } from "@playwright/test";
 import { Page } from "../fixtures/fixtures";
 
 export default abstract class BasePage {
-    public page: Page;
-    public abstract endpoint: string;
+    public readonly page: Page;
+    public abstract readonly endpoint: string;
 
     constructor(page: Page) {
         this.page = page;
@@ -32,5 +11,9 @@ export default abstract class BasePage {
 
     async open(): Promise<void> {
         await this.page.goto(this.endpoint);
+    }
+
+    async expectOpened(): Promise<void> {
+        await expect(this.page).toHaveURL(this.endpoint);
     }
 }
