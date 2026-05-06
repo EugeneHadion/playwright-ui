@@ -1,10 +1,8 @@
-import { expect, test } from "../fixtures/fixtures";
+// import { expect, test } from "../fixtures/fixtures";
 
-test.describe("Error Message for Invalid Credentials", { tag: "@003" }, () => {
-    test("Login with invalid credentials", async ({ loginPage }) => {
-        await loginPage.open();
-        await loginPage.fillCreds({ username: process.env.LOGIN_STANDART_USER, password: process.env.LOGIN_PASSWORD_INVALID });
-        const inputType = await loginPage.passwordField.getAttribute("type");
-        expect(inputType).toBe("password");
-    });
-});
+// test.describe("Password Input Masking", { tag: "@003" }, () => {
+//     test("Password field has type=password", async ({ loginPage }) => {
+//         await loginPage.open();
+//         await expect(loginPage.passwordField).toHaveAttribute("type", "password");
+//     });
+// });

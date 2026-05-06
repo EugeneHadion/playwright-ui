@@ -3,21 +3,12 @@ import { checkoutComplete } from "../constants/endpoints.constants.json";
 import BasePage from "./base.page";
 
 export default class CheckoutCompletePage extends BasePage {
-    public checkoutCompleteLabel: Locator;
+    public readonly endpoint = checkoutComplete;
+
+    public readonly checkoutCompleteLabel: Locator;
 
     constructor(page: Page) {
         super(page);
-        this.usePage = page;
-        this.endpoint = checkoutComplete;
-    }
-
-    set usePage(page: Page) {
-        super.usePage = page;
-        this.checkoutCompleteLabel = page.locator(".complete-header");
-    }
-
-    /** Open the Inventory page */
-    async open(): Promise<void> {
-        await super.open(this.endpoint);
+        this.checkoutCompleteLabel = this.page.locator(".complete-header");
     }
 }

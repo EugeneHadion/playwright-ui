@@ -1,5 +1,4 @@
 {
-    "type": "module",
     "compilerOptions": {
         "lib": ["es2022", "DOM"],
         "types": ["node", "@playwright/test", "ts-node"],
@@ -8,24 +7,24 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "sourceMap": true,
-        "strictNullChecks": false,
+        "strict": true,
         "moduleResolution": "Node",
         "baseUrl": "./",
         "paths": {
             "@configs/*": ["configs/*"],
-            "@helpers/*": ["helpers/*"],
-            "@pages/*": ["pages/*"],
-            "@api/*": ["api/*"],
             "@constants/*": ["constants/*"],
-            "@hooks/*": ["hooks/*"],
-            "@environments/*": ["environments/*"],
-            "@tests/*": ["tests/*"],
-            "@utils/*": ["utils/*"],
             "@fixtures/*": ["fixtures/*"],
-            "@types": ["types/*"]
+            "@helper/*": ["helper/*"],
+            "@hooks/*": ["hooks/*"],
+            "@pages/*": ["pages/*"],
+            "@test-data/*": ["test-data/*"],
+            "@tests/*": ["tests/*"],
+            "@utils/*": ["utils/*"]
         }
     },
     "ts-node": {
         "require": ["tsconfig-paths/register"]
-    }
+    },
+    "include": ["**/*.ts"],
+    "exclude": ["node_modules", "reports", "test-results", "playwright-report"]
 }

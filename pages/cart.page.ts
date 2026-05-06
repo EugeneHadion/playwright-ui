@@ -1,23 +1,22 @@
 import { Locator, Page } from "../fixtures/fixtures";
 import { cart } from "../constants/endpoints.constants.json";
 import BasePage from "./base.page";
+import Header from "./components/header.component";
 
 export default class CartPage extends BasePage {
-    public checkoutBtn: Locator;
+    public readonly endpoint = cart;
+
+    public readonly header: Header;
+    public readonly checkoutBtn: Locator;
 
     constructor(page: Page) {
         super(page);
-        this.usePage = page;
-        this.endpoint = cart;
+
+        this.header = new Header(page);
+        this.checkoutBtn = this.page.locator("#checkout");
     }
 
-    set usePage(page: Page) {
-        super.usePage = page;
-        this.checkoutBtn = page.locator("#checkout");
-    }
-
-    /** Open the Inventory page */
-    async open(): Promise<void> {
-        await super.open(this.endpoint);
+    async proceedToCheckout(): Promise<void> {
+        await this.checkoutBtn.click();
     }
 }
